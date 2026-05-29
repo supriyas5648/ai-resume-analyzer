@@ -49,6 +49,7 @@ This project is built using the MERN stack and demonstrates full-stack developme
    - Strengths
    - Weaknesses
    - Skill Analysis
+   - Suitable Job roles
 6. Analysis is stored in MongoDB.
 7. User can view resume analysis history anytime.
 
@@ -68,7 +69,8 @@ Create a `.env` file inside the backend folder:
 ```
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
-GEMINI_API_KEY=your_api_key
+AI_API_KEY=your_api_key
+>>>>>>> 914f8b7e8584b5b4673187306287f5b2b9e76d5e
 JWT_SECRET=your_secret_key
 ```
 
@@ -82,7 +84,5 @@ npm run dev
 ---
 
 ## 👨‍💻 Author
-
-Anuj Gusain  
- 
-⭐ If you like this project, consider giving it a star!
+Supriy Rai
+>>>>>>> 914f8b7e8584b5b4673187306287f5b2b9e76d5e

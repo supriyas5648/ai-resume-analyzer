@@ -13,6 +13,11 @@ interface Props {
     suggestions: string[];
     skills_found: string[];
     missing_skills: string[];
+    suitable_roles?: {
+      role: string;
+      match_percentage: number;
+      reason: string;
+    }[];
     summary?: string;
   };
 }
@@ -56,6 +61,23 @@ function ScoreBar({ label, score }: { label: string; score: number }) {
           className="h-full rounded-full transition-all duration-1000"
           style={{ width: `${score}%`, background: color }}
         />
+      </div>
+    </div>
+  );
+}
+
+function RoleProgress({ percentage }: { percentage: number }) {
+  const safeValue = Math.min(100, Math.max(0, percentage));
+  const color = safeValue >= 75 ? "hsl(145 60% 45%)" : safeValue >= 50 ? "hsl(38 100% 55%)" : "hsl(0 80% 60%)";
+
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-muted-foreground">
+        <span>Match</span>
+        <span>{safeValue}%</span>
+      </div>
+      <div className="h-2 rounded-full bg-muted overflow-hidden">
+        <div className="h-full rounded-full transition-all duration-700" style={{ width: `${safeValue}%`, background: color }} />
       </div>
     </div>
   );
@@ -175,6 +197,35 @@ export default function AnalysisResult({ analysis }: Props) {
           </CardContent>
         </Card>
       </div>
+
+      {Array.isArray(analysis.suitable_roles) && analysis.suitable_roles.length > 0 && (
+        <Card className="glass border-border/50">
+          <CardHeader>
+            <CardTitle className="text-foreground flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-primary" /> Suitable Job Roles
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {analysis.suitable_roles.map((role, index) => {
+                const match = Math.min(100, Math.max(0, role.match_percentage ?? 0));
+                return (
+                  <div key={`${role.role}-${index}`} className="rounded-2xl border border-border/50 bg-background/80 p-4 shadow-sm transition hover:-translate-y-0.5">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center justify-between gap-4">
+                        <h3 className="text-base font-semibold text-foreground">{role.role}</h3>
+                        <span className="text-sm font-semibold text-primary">{match}% Match</span>
+                      </div>
+                      <p className="text-sm leading-relaxed text-muted-foreground">Reason: {role.reason}</p>
+                      <RoleProgress percentage={match} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Suggestions */}
       <Card className="glass border-border/50">

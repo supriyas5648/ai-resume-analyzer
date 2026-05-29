@@ -53,7 +53,18 @@ Return ONLY valid JSON in this format:
   "weaknesses": [],
   "suggestions": [],
   "skills_found": [],
-  "missing_skills": []
+  "missing_skills": [],
+   "suitable_roles": [
+    {
+      "role": "string",
+      "match_percentage": number,
+      "reason": "string"
+    }
+  ]
+    For suitable_roles:
+- Suggest exactly 5 job roles this candidate is best suited for based on their skills, education, and experience
+- match_percentage should be realistic (not all 90+)
+- reason should be one concise sentence explaining why they fit that role
 }
 `;
 

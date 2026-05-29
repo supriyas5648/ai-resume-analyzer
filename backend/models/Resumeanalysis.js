@@ -22,6 +22,13 @@ const resumeSchema = new mongoose.Schema(
     suggestions: [String],
     skills_found: [String],
     missing_skills: [String],
+    suitable_roles: [
+  {
+    role: { type: String },
+    match_percentage: { type: Number },
+    reason: { type: String }
+  }
+],
 
     status: { type: String, default: "completed" },
   },
