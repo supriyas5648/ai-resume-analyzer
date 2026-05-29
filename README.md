@@ -70,7 +70,6 @@ Create a `.env` file inside the backend folder:
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 AI_API_KEY=your_api_key
->>>>>>> 914f8b7e8584b5b4673187306287f5b2b9e76d5e
 JWT_SECRET=your_secret_key
 ```
 
@@ -85,4 +84,4 @@ npm run dev
 
 ## 👨‍💻 Author
 Supriy Rai
->>>>>>> 914f8b7e8584b5b4673187306287f5b2b9e76d5e
+
